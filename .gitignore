@@ -1,0 +1,7 @@
+__pychache__/
+settings.json
+*.pyc
+.vscode
+.pytest_cache/
+src/configuration/credentials.yml
+.idea/
