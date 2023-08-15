@@ -4,3 +4,4 @@ settings.json
 .vscode
 .pytest_cache/
 src/configuration/credentials.yml
+.idea/

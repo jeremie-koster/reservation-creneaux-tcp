@@ -28,8 +28,8 @@ class CredentialsFetcher(ABC):
 
 
 class LocalCredentialsFetcher(CredentialsFetcher):
-    directory_path = os.path.abspath(os.curdir)
-    credentials_file_path = os.path.join(directory_path,"src/configuration/credentials.yml")
+    directory_path = os.path.dirname(os.path.realpath(__file__))
+    credentials_file_path = os.path.join(directory_path,"../configuration/credentials.yml")
     
     def __init__(self, file_path: str = credentials_file_path) -> None:
         self.file_path = file_path
@@ -44,7 +44,7 @@ class LocalCredentialsFetcher(CredentialsFetcher):
         with open(file_path, "r") as stream:
             try:
                 credentials = yaml.safe_load(stream)
-                return credentials["login"], credentials["password"]
+                return credentials["user"], credentials["password"]
             except yaml.YAMLError as exc:
                 print(exc)
 

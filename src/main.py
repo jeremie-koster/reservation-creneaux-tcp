@@ -1,23 +1,24 @@
 from selenium import webdriver
-from domain.booking import BookingWish
-from interfaces.player_credentials import LocalCredentialsFetcher
-from usecases.booking import UseCaseBooking
-from usecases.usecases import Usecase
+from src.domain.booking import BookingWish
+from src.interfaces.player_credentials import LocalCredentialsFetcher
+from src.usecases.booking import UseCaseBooking
+from src.usecases.usecases import Usecase
 
 
 
 def main(usecase: Usecase, input_data):
     match usecase:
         case Usecase.BOOKING.value:
-            booking_uc = setup_booking_uc()
+            print("Booking usecase")
+            booking_uc = setup_booking_uc(input_data)
             booking_uc.execute()
 
 
-def setup_booking_uc() -> UseCaseBooking:
+def setup_booking_uc(booking_input) -> UseCaseBooking:
     driver = setup_selenium_driver()
-    booking_data = setup_booking_wish()
+    booking_model = setup_booking_wish(booking_input)
     credentials = setup_credentials()
-    return UseCaseBooking(driver, booking_data, credentials)
+    return UseCaseBooking(driver, booking_model, credentials)
 
 
 
@@ -27,7 +28,7 @@ def setup_selenium_driver():
 def setup_booking_wish(booking_data: dict) -> BookingWish:
     return BookingWish(
         partner_first_name=booking_data["partner_first_name"],
-        partner_last_name=booking_data["partner_lastname"],
+        partner_last_name=booking_data["partner_last_name"],
         court_surface=booking_data["court_surface"],
         date=booking_data["date"],
         min_start_time=booking_data["min_time"],
@@ -38,7 +39,7 @@ def setup_credentials():
     return LocalCredentialsFetcher()
 
 if __name__ == "__main__":
-    print("Starting")
+    print("--- Starting ---")
     payload = {
         "partner_first_name": "Aurélien",
         "partner_last_name": "Buchet",

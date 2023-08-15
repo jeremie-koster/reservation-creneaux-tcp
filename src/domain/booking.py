@@ -38,8 +38,8 @@ class BookingWish:
         self.min_start_time = self.set_time_of_play(min_start_time)
         self.max_start_time = self.set_time_of_play(max_start_time)
 
-    def set_date_of_play(play_date: str) -> date:
+    def set_date_of_play(self, play_date: str) -> date:
         pass
 
-    def set_time_of_play(play_time: str) -> time:
+    def set_time_of_play(self, play_time: str) -> time:
         pass
