@@ -39,6 +39,7 @@ class BookingWish:
         court_surface: Surface = None,
         min_start_time: str = None,
         max_start_time: str = None,
+        booking_type: BookingType = BookingType.SINGLE,
     ) -> None:
         """Class representing the booking request.
 
@@ -57,6 +58,7 @@ class BookingWish:
         self.ideal_start_time = self.set_time_of_play(ideal_start_time)
         self.min_start_time = self.set_time_of_play(min_start_time)
         self.max_start_time = self.set_time_of_play(max_start_time)
+        self.booking_type = booking_type
 
     # TODO - ça dépendra du format envoyé par discord
     def set_date_of_play(self, play_date: str) -> date:
@@ -69,7 +71,7 @@ class BookingWish:
             return time(int(hour), int(minutes))
 
     @staticmethod
-    def get_time_period_starting_at(play_time: Union[time, str]) -> str:
+    def get_approximate_time_period_starting_at(play_time: Union[time, str]) -> str:
         if isinstance(play_time, time):
             hour = play_time.hour
         elif isinstance(play_time, str):
