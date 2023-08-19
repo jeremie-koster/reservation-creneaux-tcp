@@ -1,7 +1,7 @@
 from selenium import webdriver
 from src.domain.booking import BookingWish
 from src.interfaces.player_credentials import LocalCredentialsFetcher
-from usecases.uc_booking import UseCaseBooking
+from src.usecases.uc_booking import UseCaseBooking
 from src.usecases.usecases import Usecase
 
 
@@ -31,6 +31,7 @@ def setup_booking_wish(booking_data: dict) -> BookingWish:
         partner_last_name=booking_data["partner_last_name"],
         court_surface=booking_data["court_surface"],
         date=booking_data["date"],
+        ideal_start_time=booking_data["ideal_start_time"],
         min_start_time=booking_data["min_time"],
         max_start_time=booking_data["max_time"]
     )
@@ -44,7 +45,8 @@ if __name__ == "__main__":
         "partner_first_name": "Aurélien",
         "partner_last_name": "Buchet",
         "court_surface": "TB",
-        "date": "15-08-2023",
+        "date": "19-08-2023",
+        "ideal_start_time": "14:15",
         "min_time": "16:15",
         "max_time": "16:45"
     }
