@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 
 from src.interfaces.player_credentials import LocalCredentialsFetcher
 from src.interfaces.website_handler import authenticate
-from src.usecases.booking import TCP_WEBSITE_URL
+from src.usecases.uc_booking import TCP_WEBSITE_URL
 
 
 @pytest.fixture

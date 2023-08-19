@@ -1,7 +1,7 @@
 from selenium import webdriver
 from src.domain.booking import BookingWish
 from src.interfaces.player_credentials import LocalCredentialsFetcher
-from src.usecases.booking import UseCaseBooking
+from usecases.uc_booking import UseCaseBooking
 from src.usecases.usecases import Usecase
 
 
