@@ -17,6 +17,6 @@ from src.domain.booking import BookingWish
 def test_get_time_period_starting_at(input, expected):
     booking = BookingWish("Val", "Mey", "25/12/2006", "14:10")
     
-    result = booking.get_time_period_starting_at(input)
+    result = booking.get_approximate_time_period_starting_at(input)
 
     assert result == expected

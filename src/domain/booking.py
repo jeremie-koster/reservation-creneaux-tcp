@@ -13,7 +13,7 @@ class Surface(Enum):
     HARD = "GS"
 
 class BookingType(Enum):
-    SINGLE = "Single web"
+    SINGLE = "Simple web"
     DOUBLE = "Double web"
     PADEL_SINGLE = "Padel - Simple web"
     PADEL_DOUBLE = "Padel - Double web"

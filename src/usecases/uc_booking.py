@@ -8,7 +8,7 @@ TCP_RESERVATION_URL = "https://www.tennisclubdeparis.fr/fo/prive/reservation/res
 class UseCaseBooking:
     def __init__(self, driver, booking_wish: BookingWish, credentials: CredentialsFetcher) -> None:
         self.driver = driver
-        self.booking_wish: booking_wish
+        self.booking_wish = booking_wish
         self.credentials = credentials
 
     # func execute
@@ -28,6 +28,7 @@ class UseCaseBooking:
 
     def execute(self):
         authenticate(self.driver, self.credentials, TCP_WEBSITE_URL)
+        print("Authentication successful")
 
         self.driver.get(TCP_RESERVATION_URL)
         self.book_tennis_slot(self.driver, self.booking_wish)
