@@ -3,7 +3,7 @@ from src.interfaces.player_credentials import CredentialsFetcher
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-
+from bs4 import BeautifulSoup
 
 
 def authenticate(driver, credentials: CredentialsFetcher, url: str):
@@ -45,3 +45,16 @@ def complete_booking_type(driver, booking_type: str):
     select.select_by_visible_text(booking_type.value)
     return driver
 
+def parse_slots_from_html(source_html: str):
+    soup = BeautifulSoup(source_html, "html.parser")
+    
+    table = soup.find("table",attrs={"class":["liste"]})
+    table_body = table.find("tbody")
+    rows = table_body.find_all('tr')
+    data = []
+    for row in rows:
+        cols = row.find_all('td')
+        cols = [ele.text.strip() for ele in cols]
+        data.append([ele for ele in cols if ele])
+    
+    return data
