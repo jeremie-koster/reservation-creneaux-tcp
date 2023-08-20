@@ -1,6 +1,6 @@
 from src.domain.booking import BookingWish
 from src.interfaces.player_credentials import CredentialsFetcher
-from src.interfaces.website_handler import authenticate, complete_booking_form, parse_slots_from_html
+from src.interfaces.website_handler import authenticate, complete_booking_form, parse_slots_from_html, clean_booking_slots
 from src.repositories.transformations import create_df_from_parsing
 
 TCP_WEBSITE_URL = "https://www.tennisclubdeparis.fr/"
@@ -45,6 +45,7 @@ class UseCaseBooking:
         
         slots = parse_slots_from_html(driver.page_source)
         slots_df = create_df_from_parsing(slots)
+        cleaned_slots = clean_booking_slots(slots_df)
         # clean_df()
         # interpret_dates()
         # interpret_surface()
