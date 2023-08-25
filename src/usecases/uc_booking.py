@@ -1,7 +1,7 @@
 from src.domain.booking import BookingWish
 from src.interfaces.player_credentials import CredentialsFetcher
-from src.interfaces.website_handler import authenticate, complete_booking_form, parse_slots_from_html, clean_booking_slots
-from src.repositories.transformations import create_df_from_parsing
+from src.interfaces.website_handler import authenticate, complete_booking_form, parse_slots_from_html
+from src.repositories.transformations import create_df_from_parsing, clean_booking_slots, format_slots_data
 
 TCP_WEBSITE_URL = "https://www.tennisclubdeparis.fr/"
 TCP_RESERVATION_URL = "https://www.tennisclubdeparis.fr/fo/prive/reservation/reserver/step1"
@@ -42,11 +42,11 @@ class UseCaseBooking:
         # remplit le formulaire -> interface
         approximate_period_ideal_time = booking_wish.get_approximate_time_period_starting_at(booking_wish.ideal_start_time)
         driver = complete_booking_form(driver, approximate_period_ideal_time, booking_wish.date_of_play, booking_wish.booking_type)
-        
+        # TODO : refactor avec un pipe plus esthétique
         slots = parse_slots_from_html(driver.page_source)
         slots_df = create_df_from_parsing(slots)
         cleaned_slots = clean_booking_slots(slots_df)
-        # clean_df()
+        formatted_slots = format_slots_data(cleaned_slots)
         # interpret_dates()
         # interpret_surface()
         # filter_slots_by_user_preferences()
